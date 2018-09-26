@@ -11,7 +11,6 @@ This code generates randomized normally distributed data sets and plots it.
 
 import matplotlib.pyplot as plt
 import numpy as np
-import matplotlib
 
 height_male = np.random.normal(70, 4, 2000)
 weight_male = np.random.normal(182.9, 40.8, 2000)
@@ -113,14 +112,5 @@ plt.ylabel("Height")
 plt.scatter(weight_female, height_female, s=5, c="r", alpha=0.5, marker=r'o', label="Female")
 plt.scatter(weight_male, height_male, s=5, c="b", alpha=0.5, marker=r'o', label="Male")
 plt.legend(loc=1)
-f, ax = plt.subplots()
-ones = []
-for x in weight_male:
-    ones.append(1)
-ax.scatter(height_female, ones, s=10, c="r", alpha=0.1, marker=r'o', label="Female")
-ax.scatter(height_male, ones, s=10, c="b", alpha=0.1, marker=r'o', label="Male")
-ax.set_title('Height')
-plt.xlabel("Height")
-plt.ylabel("N/A")
 
 plt.show()
