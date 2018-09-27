@@ -23,37 +23,6 @@ false_negative = 0
 true_positive = 0
 false_positive = 0
 
-for i in range(2000):
-    calculation = height_male[i] + (0.141 * weight_male[i]) - 92.84
-    if calculation > 0:
-        true_positive += 1
-    elif calculation < 0:
-        false_negative += 1
-
-for i in range(2000):
-    calculation = height_female[i] + (0.141 * weight_female[i]) - 92.84
-    if calculation < 0:
-        true_negative += 1
-    elif calculation > 0:
-        false_positive += 1
-
-accuracy = (true_positive + true_negative) / (true_negative + true_positive + false_negative + false_positive)
-error = 1 - accuracy
-
-print("")
-print("True Positive:", true_positive)
-print("False Positive:", false_positive)
-print("True Negative:", true_negative)
-print("False Negative:", false_negative)
-print("Accuracy: ", accuracy)
-print("Error: ", error)
-print("")
-
-true_negative = 0
-false_negative = 0
-true_positive = 0
-false_positive = 0
-
 neuron_weights = [0.141, 1, -92.84]
 
 for i in range(1500):
