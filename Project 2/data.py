@@ -82,4 +82,10 @@ plt.scatter(weight_female, height_female, s=5, c="r", alpha=0.5, marker=r'o', la
 plt.scatter(weight_male, height_male, s=5, c="b", alpha=0.5, marker=r'o', label="Male")
 plt.legend(loc=1)
 
+x = np.array(range(0, 400))
+formula = 'x*' + repr(-(neuron_weights[0] / neuron_weights[1])) + repr(-(neuron_weights[2] / neuron_weights[1]))
+print(formula)
+y = eval(formula)
+plt.plot(x, y)
+
 plt.show()
