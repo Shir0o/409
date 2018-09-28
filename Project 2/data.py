@@ -46,6 +46,8 @@ for i in range(1500):
     neuron_weights[1] += correction * height_female[i]
     neuron_weights[2] += correction
 
+print(neuron_weights)
+
 for i in range(500):
     net = (weight_male[i] * neuron_weights[0]) + (height_male[i] * neuron_weights[1]) + neuron_weights[2]
 
@@ -82,9 +84,8 @@ plt.scatter(weight_female, height_female, s=5, c="r", alpha=0.5, marker=r'o', la
 plt.scatter(weight_male, height_male, s=5, c="b", alpha=0.5, marker=r'o', label="Male")
 plt.legend(loc=1)
 
-x = np.array(range(0, 400))
-formula = 'x*' + repr(-(neuron_weights[0] / neuron_weights[1])) + repr(-(neuron_weights[2] / neuron_weights[1]))
-print(formula)
+x = np.array(range(100, 200))
+formula = repr(-(neuron_weights[0] / neuron_weights[1])) + '*x+' + repr(-(neuron_weights[2] / neuron_weights[1]))
 y = eval(formula)
 plt.plot(x, y)
 
