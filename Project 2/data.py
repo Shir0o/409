@@ -12,11 +12,11 @@ This code generates randomized normally distributed data sets and plots it.
 import matplotlib.pyplot as plt
 import numpy as np
 
-height_male = np.random.normal(70, 4, 2000)
-weight_male = np.random.normal(182.9, 40.8, 2000)
+height_male = np.random.normal(69, 2.8, 20)
+weight_male = np.random.normal(172, 31.1, 20)
 
-height_female = np.random.normal(65, 3.5, 2000)
-weight_female = np.random.normal(143, 29, 2000)
+height_female = np.random.normal(63.6, 2.5, 20)
+weight_female = np.random.normal(143, 32.3, 20)
 
 true_negative = 0
 false_negative = 0
