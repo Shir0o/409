@@ -29,6 +29,7 @@ false_positive = 0
 # neuron_weights = [0.141, 1, -92.84]
 neuron_weights = [1, 1, 1]
 
+
 def plot_data():
     plt.title('Height and Weight')
     plt.xlabel("Weight")
