@@ -7,8 +7,8 @@ height_male, weight_male, height_female, weight_female = ([] for _ in range(4))
 true_negative, false_negative, true_positive, false_positive = (0 for _ in range(4))
 total_error = 1
 
-# neuron_weights = [0.141, 1, -92.84]
-neuron_weights = [1, 1, 1]
+neuron_weights = [0.141, 1, -92.84]
+# neuron_weights = [1, 1, 1]
 
 for _ in range(2000):
     data = file.readline().split(", ")
