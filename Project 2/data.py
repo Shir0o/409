@@ -10,6 +10,7 @@ This code generates randomized normally distributed data sets and plots it.
 """
 
 import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
 import numpy as np
 
 file = open("data.txt", "r")
@@ -28,23 +29,19 @@ false_positive = 0
 # neuron_weights = [0.141, 1, -92.84]
 neuron_weights = [1, 1, 1]
 
-
 def plot_data():
-    fig = plt.figure()
-    ax1 = fig.add_subplot(111)
-    ax1.set_title('Height and Weight')
+    plt.title('Height and Weight')
     plt.xlabel("Weight")
     plt.ylabel("Height")
-    plt.scatter(weight_female, height_female, s=5, c="r", alpha=0.5, marker=r'o', label="Female")
-    plt.scatter(weight_male, height_male, s=5, c="b", alpha=0.5, marker=r'o', label="Male")
-    plt.legend(loc=1)
-
+    plt.scatter(weight_female, height_female, s=5, c="r", alpha=0.5, marker=r'o')
+    plt.scatter(weight_male, height_male, s=5, c="b", alpha=0.5, marker=r'o')
+    red_patch = mpatches.Patch(color='red', label='Female')
+    blue_patch = mpatches.Patch(color='blue', label='Male')
+    plt.legend(loc=1, handles=[red_patch, blue_patch])
     x = np.array(range(100, 200))
     formula = repr(-(neuron_weights[0] / neuron_weights[1])) + '*x+' + repr(-(neuron_weights[2] / neuron_weights[1]))
     y = eval(formula)
-    plt.plot(x, y)
-
-    plt.show()
+    plt.plot(x, y, 'k', alpha=0.3)
 
 
 plot_data()
@@ -104,3 +101,5 @@ print("Error: ", error)
 print("")
 
 plot_data()
+
+plt.show()
