@@ -15,11 +15,11 @@ import numpy as np
 
 file = open("data.txt", "r")
 
-height_male = np.random.normal(69, 2.8, 20)
-weight_male = np.random.normal(172, 31.1, 20)
+height_male = np.random.normal(69, 2.8, 2000)
+weight_male = np.random.normal(172, 31.1, 2000)
 
-height_female = np.random.normal(63.6, 2.5, 20)
-weight_female = np.random.normal(143, 32.3, 20)
+height_female = np.random.normal(63.6, 2.5, 2000)
+weight_female = np.random.normal(143, 32.3, 2000)
 
 true_negative = 0
 false_negative = 0
@@ -46,12 +46,12 @@ def plot_data():
 
 plot_data()
 
-for i in range(20):
+for i in range(1500):
     net = (weight_male[i] * neuron_weights[0]) + (height_male[i] * neuron_weights[1]) + neuron_weights[2]
 
     desire = 1
     actual = 1 if net >= 0 else -1
-    correction = 0.3 * (desire - actual)
+    correction = 0.1 * (desire - actual)
 
     neuron_weights[0] += correction * weight_male[i]
     neuron_weights[1] += correction * height_male[i]
@@ -63,7 +63,7 @@ for i in range(20):
 
     desire = -1
     actual = -1 if net < 0 else 1
-    correction = 0.3 * (desire - actual)
+    correction = 0.1 * (desire - actual)
 
     neuron_weights[0] += correction * weight_female[i]
     neuron_weights[1] += correction * height_female[i]
@@ -73,7 +73,7 @@ for i in range(20):
 
 print(neuron_weights)
 
-for i in range(5):
+for i in range(500):
     net = (weight_male[i] * neuron_weights[0]) + (height_male[i] * neuron_weights[1]) + neuron_weights[2]
 
     if net >= 0:

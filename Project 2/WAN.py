@@ -22,7 +22,6 @@ def graph():
     plt.xlabel('Height')
     plt.ylabel('Weight')
     plt.legend()
-
     plt.show()
 
 
