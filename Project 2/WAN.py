@@ -6,9 +6,10 @@ file = open("data.txt", "r")
 height_male, weight_male, height_female, weight_female = ([] for _ in range(4))
 true_negative, false_negative, true_positive, false_positive = (0 for _ in range(4))
 total_error = 1
+count = 0
 
-neuron_weights = [0.141, 1, -92.84]
-# neuron_weights = [1, 1, 1]
+# neuron_weights = [0.141, 1, -92.84]
+neuron_weights = [1, 1, 1]
 
 for _ in range(2000):
     data = file.readline().split(", ")
@@ -36,8 +37,10 @@ def graph():
     plt.show()
 
 
-while total_error > 0.2:
+while total_error > 10 ** -5 or count < 1000:
     total_error = 0
+    count += 1
+    print(count)
 
     for i in range(1500):
         net = (height_male[i] * neuron_weights[0]) + (weight_male[i] * neuron_weights[1]) + neuron_weights[2]
