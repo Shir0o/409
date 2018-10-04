@@ -1,6 +1,8 @@
+import math
+import random
+
 import matplotlib.pyplot as plt
 import numpy as np
-import random
 
 file = open("data.txt", "r")
 
@@ -33,7 +35,18 @@ def graph():
     plt.show()
 
 
-def perceptron(training, iteration):
+def activation(soft, male, net):
+    print(math.exp())
+    if soft:
+        return 1 / (1 + math.exp(-1 * net))
+    else:
+        if male:
+            return 1 if net >= 0 else -1
+        else:
+            return -1 if net < 0 else 1
+
+
+def perceptron(training, iteration, soft):
     global neuron_weights
     neuron_weights = [random.randint(1, 100), random.randint(1, 100), random.randint(1, 100)]
 
@@ -51,7 +64,7 @@ def perceptron(training, iteration):
             net = (height_male[i] * neuron_weights[0]) + (weight_male[i] * neuron_weights[1]) + neuron_weights[2]
 
             desire = 1
-            actual = 1 if net >= 0 else -1
+            actual = activation(soft, True, net)
             error = desire - actual
             correction = 0.3 * error
 
@@ -64,7 +77,7 @@ def perceptron(training, iteration):
             net = (height_female[i] * neuron_weights[0]) + (weight_female[i] * neuron_weights[1]) + neuron_weights[2]
 
             desire = -1
-            actual = -1 if net < 0 else 1
+            actual = activation(soft, False, net)
             error = desire - actual
             correction = 0.3 * error
 
@@ -92,18 +105,20 @@ def perceptron(training, iteration):
     accuracy = (true_positive + true_negative) / (true_negative + true_positive + false_negative + false_positive)
     error = 1 - accuracy
 
-    print("")
+    print("\n")
     print("True Positive:", true_positive)
     print("False Positive:", false_positive)
     print("True Negative:", true_negative)
     print("False Negative:", false_negative)
     print("Accuracy: ", accuracy)
     print("Error: ", error)
-    print("")
+    print("\n")
 
-    print(neuron_weights)
     graph()
 
 
-perceptron(1500, 1000)
-perceptron(500, 1000)
+# perceptron(1500, 1000, False)
+# perceptron(500, 1000, False)
+
+perceptron(1500, 1000, True)
+perceptron(500, 1000, True)
