@@ -36,7 +36,6 @@ def graph():
 
 
 def activation(soft, male, net):
-    print(math.exp())
     if soft:
         return 1 / (1 + math.exp(-1 * net))
     else:
@@ -117,8 +116,8 @@ def perceptron(training, iteration, soft):
     graph()
 
 
-# perceptron(1500, 1000, False)
-# perceptron(500, 1000, False)
+perceptron(1500, 1000, False)
+perceptron(500, 1000, False)
 
-perceptron(1500, 1000, True)
-perceptron(500, 1000, True)
+# perceptron(1500, 1000, True)
+# perceptron(500, 1000, True)
