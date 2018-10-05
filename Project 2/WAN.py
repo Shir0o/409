@@ -30,14 +30,30 @@ for _ in range(2000):
     height_female.append(height)
     weight_female.append(weight)
 
-# Function that normalizes data (call this function appropriately to normalize data between 0 and 1)
-def normalize_data():
-    for i in range(2000):
-        normalized_height_male = (height_male[i] - min(height_male))/(max(height_male) - min(height_male))
-        normalized_height_female = (height_female[i] - min(height_female))/(max(height_female) - min(height_female))
 
-        normalized_weight_male = (weight_male[i] - min(weight_male))/(max(weight_male) - min(weight_male))
-        normalized_weight_female = (weight_female[i] - min(weight_female))/(max(weight_female) - min(weight_female))
+# height, weight = ([] for _ in range(2))
+# for _ in range(2000):
+#     data = file.readline().split(", ")
+#     height.append(float(data[0]))
+#     weight.append(float(data[1]))
+#
+# height_male = np.array(height)
+# weight_male = np.array(weight)
+#
+# height, weight = ([] for _ in range(2))
+# for _ in range(2000):
+#     data = file.readline().split(", ")
+#     height.append(float(data[0]))
+#     weight.append(float(data[1]))
+#
+# height_female = np.array(height)
+# weight_female = np.array(weight)
+#
+# height_male = (height_male - min(height_male)) / (max(height_male) - min(height_male))
+# weight_male = (weight_male - min(weight_male)) / (max(weight_male) - min(weight_male))
+#
+# height_female = (height_female - min(height_female)) / (max(height_female) - min(height_female))
+# weight_female = (weight_female - min(weight_female)) / (max(weight_female) - min(weight_female))
 
 
 def graph():
@@ -58,7 +74,7 @@ def graph():
 def activation(soft, male, net):
     # print(net)
     if soft:
-        return np.tanh(net)
+        return np.tanh(0.5 * net)
     else:
         if male:
             return 1 if net >= 0 else -1
@@ -144,5 +160,6 @@ def perceptron(training, iteration, soft):
 
 # perceptron(1500, 2000, False)
 # perceptron(500, 2000, False)
+
 perceptron(1500, 2000, True)
 perceptron(500, 2000, True)
