@@ -10,13 +10,25 @@ neuron_weights = []
 
 for _ in range(2000):
     data = file.readline().split(", ")
-    height_male.append(float(data[0]))
-    weight_male.append(float(data[1]))
+    height = float(data[0])
+    weight = float(data[1])
+
+    # height = (height - 69) / 2.8
+    # weight = (weight - 172) / 31.1
+
+    height_male.append(height)
+    weight_male.append(weight)
 
 for _ in range(2000):
     data = file.readline().split(", ")
-    height_female.append(float(data[0]))
-    weight_female.append(float(data[1]))
+    height = float(data[0])
+    weight = float(data[1])
+
+    # height = (height - 63.6) / 2.5
+    # weight = (weight - 143) / 32.3
+
+    height_female.append(height)
+    weight_female.append(weight)
 
 
 def graph():
