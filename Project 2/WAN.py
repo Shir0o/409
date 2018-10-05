@@ -30,6 +30,15 @@ for _ in range(2000):
     height_female.append(height)
     weight_female.append(weight)
 
+# Function that normalizes data (call this function appropriately to normalize data between 0 and 1)
+def normalize_data():
+    for i in range(2000):
+        normalized_height_male = (height_male[i] - min(height_male))/(max(height_male) - min(height_male))
+        normalized_height_female = (height_female[i] - min(height_female))/(max(height_female) - min(height_female))
+
+        normalized_weight_male = (weight_male[i] - min(weight_male))/(max(weight_male) - min(weight_male))
+        normalized_weight_female = (weight_female[i] - min(weight_female))/(max(weight_female) - min(weight_female))
+
 
 def graph():
     plt.scatter(height_male, weight_male, s=5, c='b', alpha=0.5, marker=r'o', label='Male')
@@ -135,6 +144,5 @@ def perceptron(training, iteration, soft):
 
 # perceptron(1500, 2000, False)
 # perceptron(500, 2000, False)
-
 perceptron(1500, 2000, True)
 perceptron(500, 2000, True)
