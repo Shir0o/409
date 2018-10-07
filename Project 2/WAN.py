@@ -1,13 +1,36 @@
+"""
+Sudhansu Shrestha
+Ibrahim Rahman
+Yilong Wang
+10/07/2018
+
+Python version: 3.7
+Make sure you have numpy library installed before running it.
+
+Files Included for this project:
+1. data.txt : This is the dataset generated from Project 1
+2. WAN.py : This is the main source code, that trains 75 and 25
+            percent of data for hard and soft activation functions
+            accordingly.
+
+NOTE: The graphs are generated simultaneously, so close one graph
+in order to get the next graph.
+
+Accuracy and error rates are printed in command line.
+"""
 import random
 
 import matplotlib.pyplot as plt
 import numpy as np
 
+"File open data.txt"
 file = open("data.txt", "r")
 
+"Initialize arrays and neuron weight"
 height_male, weight_male, height_female, weight_female = ([] for _ in range(4))
 neuron_weights = []
 
+"Read from data.txt"
 for _ in range(2000):
     data = file.readline().split(", ")
     height = float(data[0])
@@ -25,6 +48,7 @@ for _ in range(2000):
     weight_female.append(weight)
 
 
+"This struct graphs the data set and each linear seperator"
 def graph():
     plt.scatter(height_male, weight_male, s=5, c='b', alpha=0.5, marker=r'o', label='Male')
     plt.scatter(height_female, weight_female, s=5, c='r', alpha=0.5, marker=r'o', label='Female')
@@ -40,6 +64,7 @@ def graph():
     plt.show()
 
 
+"Controller strct for soft or hard activation function"
 def activation(soft, male, net):
     if soft:
         return np.tanh(0.5 * net)
@@ -50,6 +75,7 @@ def activation(soft, male, net):
             return -1 if net < 0 else 1
 
 
+"Neuron training"
 def perceptron(training, iteration, soft):
     global neuron_weights
     neuron_weights = [round(random.uniform(-0.5, 0.5), 2), round(random.uniform(-0.5, 0.5), 2),
@@ -120,6 +146,7 @@ def perceptron(training, iteration, soft):
     print("")
 
     graph()
+
 
 
 print("Hard activation:")
