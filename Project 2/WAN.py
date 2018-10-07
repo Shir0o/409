@@ -122,8 +122,10 @@ def perceptron(training, iteration, soft):
     graph()
 
 
-perceptron(1500, 2000, False)
-perceptron(500, 2000, False)
+print("Hard activation:")
+perceptron(1500, 2500, False)
+perceptron(500, 2500, False)
 
-perceptron(1500, 2000, True)
-perceptron(500, 2000, True)
+print("Soft activation:")
+perceptron(1500, 2500, True)
+perceptron(500, 2500, True)
