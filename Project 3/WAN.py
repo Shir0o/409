@@ -1,42 +1,42 @@
-import random
+import operator
+
 import numpy as np
 import matplotlib.pyplot as plt
 
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, r2_score
+from sklearn.preprocessing import PolynomialFeatures
+
 file = open("train_data_1.txt", "r")
 time, energy = ([] for _ in range(2))
-weights = []
 
 for _ in range(16):
     data = file.readline().split(", ")
     time.append(float(data[0]))
     energy.append(float(data[1]))
 
-weights = [round(random.uniform(-0.5, 0.5)), round(random.uniform(-0.5, 0.5)),
-           round(random.uniform(-0.5, 0.5)), round(random.uniform(-0.5, 0.5))]
+time = np.array(time)
+energy = np.array(energy)
 
-for i in range(16):
-    net = ((time[i] ** 3) * weights[0]) + ((time[i] ** 2) * weights[1]) + (time[i] * weights[2]) + weights[3]
+time = time[:, np.newaxis]
+energy = energy[:, np.newaxis]
 
-    desire = energy[i]
-    actual = net
-    error = desire - actual
-    correction = 0.1 * error
+polynomial_features = PolynomialFeatures(degree=3)
+x_poly = polynomial_features.fit_transform(time)
 
-    weights[0] += correction * (time[i] ** 3)
-    weights[1] += correction * (time[i] ** 2)
-    weights[2] += correction * time[i]
-    weights[3] += correction
+model = LinearRegression()
+model.fit(x_poly, energy)
+prediction = model.predict(x_poly)
 
-print(weights)
+rmse = np.sqrt(mean_squared_error(energy, prediction))
+r2 = r2_score(energy, prediction)
+print(rmse)
+print(r2)
 
-plt.scatter(time, energy)
-plt.xlabel('Time')
-plt.ylabel('Energy')
+plt.scatter(time, energy, s=10)
 
-x = np.array(range(0, 25))
-formula = repr(weights[0]) + '*x**3+' + repr(weights[1]) + '*x**2+' + repr(weights[2]) + '*x+' + repr(weights[3])
-print(formula)
-y = eval(formula)
-plt.plot(x, y)
-
+sort_axis = operator.itemgetter(0)
+sorted_zip = sorted(zip(time, prediction), key=sort_axis)
+time, prediction = zip(*sorted_zip)
+plt.plot(time, prediction, color='m')
 plt.show()
