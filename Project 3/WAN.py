@@ -1,4 +1,5 @@
 import operator
+import random
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -15,28 +16,31 @@ for _ in range(16):
     time.append(float(data[0]))
     energy.append(float(data[1]))
 
-time = np.array(time)
-energy = np.array(energy)
+weights = [round(random.uniform(-0.5, 0.5), 2), round(random.uniform(-0.5, 0.5), 2),
+           round(random.uniform(-0.5, 0.5), 2), round(random.uniform(-0.5, 0.5), 2)]
 
-time = time[:, np.newaxis]
-energy = energy[:, np.newaxis]
+for i in range(16):
+    net = ((time[i] ** 3) * weights[0]) + ((time[i] ** 2) * weights[1]) + (time[i] * weights[2]) + weights[3]
 
-polynomial_features = PolynomialFeatures(degree=3)
-x_poly = polynomial_features.fit_transform(time)
+    desire = energy[i]
+    actual = net
+    error = desire - actual
+    correction = 0.1 * error
 
-model = LinearRegression()
-model.fit(x_poly, energy)
-prediction = model.predict(x_poly)
+    weights[0] += correction * (time[i] ** 3)
+    weights[1] += correction * (time[i] ** 2)
+    weights[2] += correction * time[i]
+    weights[3] += correction
 
-rmse = np.sqrt(mean_squared_error(energy, prediction))
-r2 = r2_score(energy, prediction)
-print(rmse)
-print(r2)
+print(weights)
 
-plt.scatter(time, energy, s=10)
+plt.xlabel('Height')
+plt.ylabel('Weight')
+plt.scatter(time, energy)
 
-sort_axis = operator.itemgetter(0)
-sorted_zip = sorted(zip(time, prediction), key=sort_axis)
-time, prediction = zip(*sorted_zip)
-plt.plot(time, prediction, color='m')
+x = np.array(range(0, 20))
+formula = repr(weights[0]) + '*x**3+' + repr(weights[1]) + '*x**2+' + repr(weights[2]) + '*x+' + repr(weights[3])
+y = eval(formula)
+plt.plot(x, y, 'k', alpha=0.3)
+
 plt.show()
