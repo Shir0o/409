@@ -9,10 +9,12 @@ def graph():
     plt.ylabel('Weight')
     plt.scatter(time, energy)
 
-    x = np.array(range(-2, 5))
-    formula = repr(weights[0]) + '*x**3+' + repr(weights[1]) + '*x**2+' + repr(weights[2]) + '*x+' + repr(weights[3])
+    x = np.array(range(0, 2))
+    # formula = repr(weights[0]) + '*x**3+' + repr(weights[1]) + '*x**2+' + repr(weights[2]) + '*x+' + repr(weights[3])
     # formula = repr(weights[0]) + '*x+' + repr(weights[1])
-    y = eval(formula)
+    # y = eval(formula)
+    y = weights[0] * (x ** 3) + weights[1] * (x ** 2) + weights[2] * x + weights[3]
+    # y = x ** 3
     plt.plot(x, y, 'k')
 
     plt.show()
@@ -31,9 +33,15 @@ weights = [round(random.uniform(-0.5, 0.5), 2), round(random.uniform(-0.5, 0.5),
 # weights = [round(random.uniform(-0.5, 0.5), 2), round(random.uniform(-0.5, 0.5), 2)]
 
 for i in range(16):
-    time[i] = (time[i] - np.mean(time)) / np.std(time)
+    # time[i] = (time[i] - np.mean(time)) / np.std(time)
+    # energy[i] = (energy[i] - np.mean(energy)) / np.std(energy)
+    time[i] = (time[i] - min(time)) / (max(time) - min(time))
+    # energy[i] = (energy[i] - min(energy)) / (max(energy) - min(energy))
 
-for _ in range(5000):
+print(time)
+print(energy)
+
+for _ in range(10000):
     total_error = 0
 
     for i in range(16):
@@ -46,8 +54,8 @@ for _ in range(5000):
         total_error += error ** 2
         correction = 0.1 * error
 
-        weights[0] += correction * time[i]
-        weights[1] += correction * time[i]
+        weights[0] += correction * (time[i] ** 3)
+        weights[1] += correction * (time[i] ** 2)
         weights[2] += correction * time[i]
         weights[3] += correction
 
