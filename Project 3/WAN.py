@@ -4,17 +4,24 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
+def custom_range(x, y, jump):
+    arr = []
+    while x < y:
+        arr.append(x)
+        x += jump
+
+    return arr
+
+
 def graph():
     plt.xlabel('Height')
     plt.ylabel('Weight')
     plt.scatter(time, energy)
 
-    x = np.array(range(0, 2))
-    # formula = repr(weights[0]) + '*x**3+' + repr(weights[1]) + '*x**2+' + repr(weights[2]) + '*x+' + repr(weights[3])
-    # formula = repr(weights[0]) + '*x+' + repr(weights[1])
-    # y = eval(formula)
+    x = np.array(custom_range(0, 1.1, 0.01))
     y = weights[0] * (x ** 3) + weights[1] * (x ** 2) + weights[2] * x + weights[3]
-    # y = x ** 3
+    print(x)
+    print(y)
     plt.plot(x, y, 'k')
 
     plt.show()
