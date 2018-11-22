@@ -1,3 +1,19 @@
+"""
+Sudhansu Shrestha
+Ibrahim Rahman
+Yilong Wang
+
+Python version: 3.7
+Required library: numpy, matplotlib
+
+Files Included for this project:
+1. data.txt : Data sets (including training and testing)
+2. WAN.py : Main source code that runs delta learning algorithm on the data
+
+Total error and trained weights are printed in command line.
+Graphs are also generated with title and axis labeled.
+"""
+
 import random
 
 import matplotlib.pyplot as plt
@@ -131,5 +147,3 @@ train('train_data_3.txt', 1)
 
 # Testing
 train('test_data_4.txt', 1)
-
-reset_weights()
